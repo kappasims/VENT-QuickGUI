@@ -219,7 +219,7 @@ namespace QuickGUI
 		* Selects the item at index given.  If index is not valid,
 		* all items will be de-selected.
 		*/
-		void selectItem(int index, bool autoFireEvent = true);
+		void selectItem(int index);
 		/**
 		* Builds the Widget from a ScriptDefinition or Writes the widget to a ScriptDefinition.
 		*/

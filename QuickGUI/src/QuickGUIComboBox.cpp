@@ -703,8 +703,9 @@ namespace QuickGUI
 		redraw();
 	}
 
-	void ComboBox::selectItem(int index, bool autoFireEvent)
+	void ComboBox::selectItem(int index)
 	{
+		const bool autoFireEvent = true;
 		mSelectedItem = getItem(index);
 
 		mText->clearText();

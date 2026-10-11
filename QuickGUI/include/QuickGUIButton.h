@@ -107,11 +107,6 @@ namespace QuickGUI
 		*/
 		virtual void updateClientDimensions();
 		
-		virtual void setHiddenID(int ID);
-		virtual int getHiddenID();
-
-		virtual void setHiddenString(Ogre::String str);
-		virtual Ogre::String getHiddenString();
 
 	protected:
 		Button(const Ogre::String& name);
@@ -144,9 +139,6 @@ namespace QuickGUI
 		// Updates the SkinElement used for border detection and client area calculations.
 		virtual void updateSkinElement();
 
-	private:
-	  int hiddenInt;
-	  Ogre::String hiddenString;
 	};
 }
 

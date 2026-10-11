@@ -109,7 +109,7 @@ namespace QuickGUI
 		/**
 		* De-selects any selected ListItems in the list.
 		*/
-		void clearSelection(bool autoFireEvent = true);
+		void clearSelection();
 		/**
 		* Clears the user defined handler associated with the EVENT given. (sets the handlerName to "")
 		*/
@@ -186,7 +186,7 @@ namespace QuickGUI
 		* Selects the item at index given.  If index is not valid,
 		* all items will be de-selected.
 		*/
-		void selectItem(unsigned int index, bool autoFireEvent = true, bool multiSelecting = false);
+		void selectItem(unsigned int index);
 		/**
 		* Sets the height of each ListItem within the List.
 		*/

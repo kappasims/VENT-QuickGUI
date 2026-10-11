@@ -259,23 +259,4 @@ namespace QuickGUI
 			mSkinElement = mSkinType->getSkinElement(DEFAULT);
 	}
 	
-	void Button::setHiddenID(int ID)
-	{
-		hiddenInt = ID;
-	}
-
-	int Button::getHiddenID()
-	{
-		return hiddenInt;
-	}
-
-	void Button::setHiddenString(Ogre::String str)
-	{
-		hiddenString = str;
-	}
-
-	Ogre::String Button::getHiddenString()
-	{
-		return hiddenString;
-	}
 }

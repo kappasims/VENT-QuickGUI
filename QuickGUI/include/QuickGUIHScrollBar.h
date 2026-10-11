@@ -190,11 +190,6 @@ namespace QuickGUI
 		*/
 		virtual void updateClientDimensions();
 		
-		virtual void setHiddenID(int ID);
-		virtual int getHiddenID();
-
-		virtual void setHiddenString(Ogre::String str);
-		virtual Ogre::String getHiddenString();
 
 		
 
@@ -267,9 +262,6 @@ namespace QuickGUI
 		void onRightButtonClicked(const EventArgs& args);
 		void onBarClicked(const EventArgs& args);
 
-	private:
-		int hiddenInt;
-		Ogre::String hiddenString;
 	};
 }
 

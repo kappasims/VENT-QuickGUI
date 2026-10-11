@@ -226,8 +226,9 @@ namespace QuickGUI
 		redraw();
 	}
 
-	void List::clearSelection(bool autoFireEvent)
+	void List::clearSelection()
 	{
+		const bool autoFireEvent = true;
 		_clearSelection();
 
 		if(autoFireEvent)
@@ -661,8 +662,10 @@ namespace QuickGUI
 		fireListEvent(LIST_EVENT_SELECTION_CHANGED,args);
 	}
 
-	void List::selectItem(unsigned int index, bool autoFireEvent, bool multiSelecting)
+	void List::selectItem(unsigned int index)
 	{
+		const bool autoFireEvent = true;
+		const bool multiSelecting = false;
 	  if(!multiSelecting)
 		_clearSelection();
 

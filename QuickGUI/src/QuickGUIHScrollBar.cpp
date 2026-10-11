@@ -638,25 +638,6 @@ namespace QuickGUI
 	}
 	
 	
-	void HScrollBar::setHiddenID(int ID)
-	{
-		hiddenInt = ID;
-	}
-
-	int HScrollBar::getHiddenID()
-	{
-		return hiddenInt;
-	}
-
-	void HScrollBar::setHiddenString(Ogre::String str)
-	{
-		hiddenString = str;
-	}
-
-	Ogre::String HScrollBar::getHiddenString()
-	{
-		return hiddenString;
-	}
 
 }
 

@@ -212,25 +212,6 @@ namespace QuickGUI
 		ContainerWidget::setEnabled(enabled);
 	}
 
-	void ListItem::setHiddenID(int ID)
-	{
-		hiddenInt = ID;
-	}
-
-	int ListItem::getHiddenID()
-	{
-		return hiddenInt;
-	}
-
-	void ListItem::setHiddenString(Ogre::String str)
-	{
-		hiddenString = str;
-	}
-
-	Ogre::String ListItem::getHiddenString()
-	{
-		return hiddenString;
-	}
 
 
 	void ListItem::setIndex(unsigned int index)
