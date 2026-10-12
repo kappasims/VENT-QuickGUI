@@ -414,6 +414,18 @@ namespace QuickGUI
 		* NOTE: A Sheet is a Window.
 		*/
 		Window* getWindow();
+		/**
+		* Returns true if the sheet this widget belongs to sends keyboard input to it.
+		*/
+		bool isKeyboardListener();
+		/**
+		* Stops the sheet sending keyboard input to this widget, if it was doing so.
+		*/
+		void releaseKeyboardListener();
+		/**
+		* Removes the handler the object given registered for a Window event of the Window this widget is in, if there is one.
+		*/
+		void removeWindowEventHandler(WindowEvent EVENT, void* obj);
 
 		/**
 		* Returns true if there exists a Widget Event handler was registered by the object given,

@@ -580,8 +580,7 @@ namespace QuickGUI
 			if(mTextCursor != NULL)
 				mTextCursor->setVisible(false);
 
-			if((mWidgetDesc->sheet != NULL) && (mWidgetDesc->sheet->getKeyboardListener() == this))
-				mWidgetDesc->sheet->setKeyboardListener(NULL);
+			releaseKeyboardListener();
 		}
 	}
 
@@ -659,8 +658,7 @@ namespace QuickGUI
 		if(mParentWidget != NULL)
 		{
 			// Remove event handler from previous window
-			if(mParentWidget->getWindow() != NULL)
-				mParentWidget->getWindow()->removeWindowEventHandler(WINDOW_EVENT_DRAWN,this);
+			mParentWidget->removeWindowEventHandler(WINDOW_EVENT_DRAWN,this);
 		}
 
 		mParentWidget = parent;

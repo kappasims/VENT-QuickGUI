@@ -252,6 +252,10 @@ namespace QuickGUI
 		*/
 		Character* getCharacter(unsigned int index);
 		/**
+		* Returns the height in pixels of the font of the Character at the given index.
+		*/
+		float getCharacterFontHeight(unsigned int index);
+		/**
 		* Returns the position of the character given relative to the Text.
 		* NOTE: The position of the Character class is relative to its TextLine.
 		*/

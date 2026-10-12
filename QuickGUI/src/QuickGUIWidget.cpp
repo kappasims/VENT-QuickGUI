@@ -693,6 +693,23 @@ namespace QuickGUI
 		return mWindow;
 	}
 
+	bool Widget::isKeyboardListener()
+	{
+		return (mWidgetDesc->sheet != NULL) && (mWidgetDesc->sheet->getKeyboardListener() == this);
+	}
+
+	void Widget::releaseKeyboardListener()
+	{
+		if(isKeyboardListener())
+			mWidgetDesc->sheet->setKeyboardListener(NULL);
+	}
+
+	void Widget::removeWindowEventHandler(WindowEvent EVENT, void* obj)
+	{
+		if(mWindow != NULL)
+			mWindow->removeWindowEventHandler(EVENT,obj);
+	}
+
 	bool Widget::hasEventHandler(WidgetEvent EVENT, void* obj)
 	{
 		for(std::vector<EventHandlerSlot*>::iterator it = mWidgetEventHandlers[EVENT].begin(); it != mWidgetEventHandlers[EVENT].end(); ++it)

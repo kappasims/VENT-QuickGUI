@@ -687,7 +687,7 @@ namespace QuickGUI
 			index = 0;
 
 		// Reset cursor blinking every time we move the cursor
-		if(!mDesc->textarea_readOnly && (mDesc->sheet->getKeyboardListener() == this))
+		if(!mDesc->textarea_readOnly && isKeyboardListener())
 		{
 			mBlinkTimer->reset();
 			mTextCursor->setVisible(true);
@@ -697,7 +697,7 @@ namespace QuickGUI
 		if(index == 0)
 			mTextCursor->setHeight(Root::getSingleton().getFont(mDesc->textarea_defaultFontName).getHeight());
 		else
-			mTextCursor->setHeight(mText->getCharacter(static_cast<unsigned int>(index - 1))->getFontHeight());
+			mTextCursor->setHeight(mText->getCharacterFontHeight(static_cast<unsigned int>(index - 1)));
 
 		// Update CursorIndex
 		mCursorIndex = index;
@@ -810,8 +810,7 @@ namespace QuickGUI
 		if(mParentWidget != NULL)
 		{
 			// Remove event handler from previous window
-			if(mParentWidget->getWindow() != NULL)
-				mParentWidget->getWindow()->removeWindowEventHandler(WINDOW_EVENT_DRAWN,this);
+			mParentWidget->removeWindowEventHandler(WINDOW_EVENT_DRAWN,this);
 		}
 
 		mParentWidget = parent;
