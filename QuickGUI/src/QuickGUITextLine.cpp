@@ -15,7 +15,7 @@ namespace QuickGUI
 
 	void TextLine::_verticallyAlignCharacters()
 	{
-		float maxBaseLine = mLargestFont->getMaxBearingY();
+		float maxBaseLine = getMaxBearingY();
 
 		for(std::vector<Character*>::iterator it = mCharacters.begin(); it != mCharacters.end(); ++it)
 		{
@@ -38,14 +38,14 @@ namespace QuickGUI
 		c->setBaseline(baseline);
 		mCharacters.push_back(c);
 
-		if((mLargestFont == NULL) || (c->getFontHeight() > mLargestFont->getHeight()))
+		if((mLargestFont == NULL) || (c->getHeight() > getHeight()))
 		{
 			mLargestFont = c->font;
 			_verticallyAlignCharacters();
 		}
 		else
 		{
-			float maxBaseLine = mLargestFont->getMaxBearingY();
+			float maxBaseLine = getMaxBearingY();
 			float baseLine = c->getMaxBearingY();
 			c->dimensions.position.y = maxBaseLine - baseLine;
 		}
@@ -207,6 +207,16 @@ namespace QuickGUI
 		}
 
 		return mLargestFont->getHeight();
+	}
+
+	float TextLine::getMaxBearingY()
+	{
+		if(mLargestFont == NULL)
+		{
+			return 0;
+		}
+
+		return mLargestFont->getMaxBearingY();
 	}
 
 	int TextLine::getLength()

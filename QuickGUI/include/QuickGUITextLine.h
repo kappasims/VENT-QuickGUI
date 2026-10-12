@@ -11,7 +11,8 @@
 
 namespace QuickGUI
 {
-	class _QuickGUIExport TextLine
+	class _QuickGUIExport TextLine :
+		public MeasurableText
 	{
 	public:
 		TextLine();
@@ -60,6 +61,10 @@ namespace QuickGUI
 		* all characters in the text line.
 		*/
 		float getWidth();
+		/**
+		* Returns the distance from the top of the tallest glyph in the TextLine to the baseline.
+		*/
+		float getMaxBearingY();
 
 		/**
 		* Sets whether or not the Text will be masked. (password box)

@@ -3,6 +3,7 @@
 
 #include "QuickGUIExportDLL.h"
 #include "QuickGUIRect.h"
+#include "QuickGUIMeasurableText.h"
 #include "QuickGUIUVRect.h"
 #include "QuickGUIOgreEquivalents.h"
 #include "QuickGUIFont.h"
@@ -14,7 +15,8 @@
 
 namespace QuickGUI
 {
-	class _QuickGUIExport Character
+	class _QuickGUIExport Character :
+		public MeasurableText
 	{
 	public:
 		Character(Ogre::UTFString::code_point cp, const Font& f, ColourValue cv);
@@ -67,10 +69,11 @@ namespace QuickGUI
 		float getBearing() const { return mBearing; }
 		/// Returns the name of the font this character is drawn with.
 		Ogre::String getFontName() const { return font->getName(); }
-		/// Returns the height in pixels of the font this character is drawn with.
-		float getFontHeight() const { return font->getHeight(); }
-		/// Returns the distance in pixels from the top of the tallest glyph of the font to the baseline.
-		float getMaxBearingY() const { return font->getMaxBearingY(); }
+		/// The pen advance of the character.
+		float getWidth() { return mAdvance; }
+		/// The height in pixels of the font this character is drawn with.
+		float getHeight() { return font->getHeight(); }
+		float getMaxBearingY() { return font->getMaxBearingY(); }
 		/// Returns the name of the texture that holds the bitmap of this glyph.
 		Ogre::String getTextureName() const { return font->getTextureName(); }
 

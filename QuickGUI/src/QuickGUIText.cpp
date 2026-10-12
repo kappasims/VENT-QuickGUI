@@ -758,7 +758,7 @@ namespace QuickGUI
 
     float Text::getCharacterFontHeight(unsigned int index)
     {
-        return getCharacter(index)->getFontHeight();
+        return getCharacter(index)->getHeight();
     }
 
     Point Text::getCharacterPosition(unsigned int index)
