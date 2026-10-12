@@ -1,5 +1,6 @@
 set (QuickGUI_FILES_SRC
 	QuickGUIBrush.cpp
+	QuickGUIBrushPipeline.cpp
 	QuickGUIButton.cpp
 	QuickGUICharacter.cpp
 	QuickGUICheckBox.cpp
