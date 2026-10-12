@@ -11,6 +11,8 @@
 
 namespace QuickGUI
 {
+	class TextSelection;
+
 	class _QuickGUIExport TextLine
 	{
 	public:
@@ -25,7 +27,7 @@ namespace QuickGUI
 		/**
 		* Draws all characters in this object starting at point p.
 		*/
-		void draw(Point p);
+		void draw(Point p, const TextSelection& selection);
 
 		/**
 		* Returns true if this TextLine has no characters, false otherwise.

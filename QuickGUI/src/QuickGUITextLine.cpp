@@ -1,5 +1,6 @@
 #include "QuickGUITextLine.h"
 #include "QuickGUIText.h"
+#include "QuickGUITextSelection.h"
 
 namespace QuickGUI
 {
@@ -61,7 +62,7 @@ namespace QuickGUI
 		c->dimensions.position.roundUp();
 	}
 
-	void TextLine::draw(Point p)
+	void TextLine::draw(Point p, const TextSelection& selection)
 	{
 		mPosition = p;
 		mPosition.roundUp();
@@ -72,7 +73,7 @@ namespace QuickGUI
 		brush->endRectQueue();
 
 		// Do an initial pass to draw any quads related to text highlighting
-		brush->setTexture("TextSelection");
+		brush->setTexture(selection);
 
 		brush->beginRectQueue();
 

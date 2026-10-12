@@ -6,6 +6,7 @@
 #include "QuickGUIBrush.h"
 #include "QuickGUICharacter.h"
 #include "QuickGUITextLine.h"
+#include "QuickGUIOgreTextSelection.h"
 
 #include "OgreMaterial.h"
 #include "OgreTechnique.h"
@@ -191,6 +192,8 @@ namespace QuickGUI
             buf->unlock();
         }
 
+        mSelection = OGRE_NEW_T(OgreTextSelection,Ogre::MEMCATEGORY_GENERAL)(static_cast<Ogre::TexturePtr>(Ogre::TextureManager::getSingleton().getByName("TextSelection")));
+
         mTextDesc = &d;
         mTextDesc->text = this;
 
@@ -200,6 +203,8 @@ namespace QuickGUI
 
     Text::~Text()
     {
+        OGRE_DELETE_T(mSelection,TextSelection,Ogre::MEMCATEGORY_GENERAL);
+
         for(std::vector<TextLine*>::iterator it = mTextLines.begin(); it != mTextLines.end(); ++it)
             OGRE_DELETE_T((*it),TextLine,Ogre::MEMCATEGORY_GENERAL);
 
@@ -609,7 +614,7 @@ namespace QuickGUI
             p.x = Ogre::Math::Ceil(p.x);
             p.y = Ogre::Math::Ceil(p.y);
 
-            (*it)->draw(p);
+            (*it)->draw(p,*mSelection);
 
             p.y += (*it)->getHeight();
         }

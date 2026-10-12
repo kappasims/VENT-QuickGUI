@@ -1,5 +1,6 @@
 #include "QuickGUIBrush.h"
 #include "QuickGUISkinElement.h"
+#include "QuickGUIOgreTextSelection.h"
 #include "QuickGUIVertex.h"
 
 #include <OgreMaterialManager.h>
@@ -924,6 +925,11 @@ namespace QuickGUI
                 mRenderSystem->_setTexture(0, true, mTexture);
         }
     }
+
+	void Brush::setTexture(const TextSelection& selection)
+	{
+		setTexture(dynamic_cast<const Ogre::TexturePtr&>(selection));
+	}
 
 	void Brush::updateSceneManager(Ogre::SceneManager* sceneManager)
 	{

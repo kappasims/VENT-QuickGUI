@@ -23,6 +23,7 @@ namespace QuickGUI
 	class Character;
 	class Text;
 	class TextLine;
+	class TextSelection;
 
 	class _QuickGUIExport TextSegment
 	{
@@ -478,6 +479,7 @@ namespace QuickGUI
 
 	protected:
 		TextDesc* mTextDesc;
+		TextSelection* mSelection;
 
 		bool mMaskText;
 		Ogre::UTFString::code_point mMaskSymbol;

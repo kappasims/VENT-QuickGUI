@@ -37,6 +37,8 @@ namespace QuickGUI
 	//const int DEFAULT_VERTEX_BUFFER_SIZE = 2730;
 	const int VERTEX_COUNT = 3072;
 
+	class TextSelection;
+
 	/*
 	* The brush class represents the tool required to draw 2d textures to the screen.
 	*/
@@ -193,6 +195,10 @@ namespace QuickGUI
 		* Sets the current texture to draw with
 		*/
 		void setTexture(Ogre::TexturePtr p);
+		/**
+		* Sets the current texture to the one drawn behind highlighted text
+		*/
+		void setTexture(const TextSelection& selection);
 
 		/**
 		* Updates the SceneManager, used to render any Materials.
