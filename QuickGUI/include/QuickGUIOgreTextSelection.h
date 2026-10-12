@@ -17,6 +17,12 @@ namespace QuickGUI
 	public:
 		OgreTextSelection() {}
 		OgreTextSelection(const Ogre::TexturePtr& p) : Ogre::TexturePtr(p) {}
+
+		std::string getName() const { return (*this)->getName(); }
+		std::string getGroup() const { return (*this)->getGroup(); }
+		float getWidth() const { return static_cast<float>((*this)->getWidth()); }
+		float getHeight() const { return static_cast<float>((*this)->getHeight()); }
+		bool empty() const { return !static_cast<bool>(*this); }
 	};
 }
 
