@@ -74,7 +74,7 @@ namespace QuickGUI
 #endif
 
         // OpenGL 3+ has no fixed-function pipeline, so it draws through GLSL programs.
-        if(mRenderSystem->getName().find("OpenGL 3+") != Ogre::String::npos)
+        if(mRenderSystem->getName().find("OpenGL 3+") != std::string::npos)
         {
                 GlslProgramSource programs;
                 programs.vertexName = "QuickGUI/GL3PlusVertex";
@@ -391,7 +391,7 @@ namespace QuickGUI
 		if((e == NULL) || (e->getTextureName() == ""))
 			return;
 
-		Ogre::String previousTextureName = mTexture->getName();
+		std::string previousTextureName = mTexture->getName();
 
 		setTexture(e->getTextureName());
 
@@ -836,7 +836,7 @@ namespace QuickGUI
        mPipeline->targetChanged();
     }
 
-    void Brush::setTexture(const Ogre::String& textureName)
+    void Brush::setTexture(const std::string& textureName)
     {
         if(mQueuedItems)
                 throw Exception(Exception::ERR_RENDERINGAPI_ERROR,"Cannot Change Texture with Items Queued for Drawing! Call endRectQueue to draw all queued items before hand.","Brush::setTexture");

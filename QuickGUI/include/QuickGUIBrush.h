@@ -205,7 +205,7 @@ namespace QuickGUI
 		/**
 		* Sets the current texture to draw with
 		*/
-		void setTexture(const Ogre::String& textureName);
+		void setTexture(const std::string& textureName);
 		/**
 		* Sets the current texture to draw with
 		*/
