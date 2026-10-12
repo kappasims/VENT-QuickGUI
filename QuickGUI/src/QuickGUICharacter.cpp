@@ -21,11 +21,13 @@ namespace QuickGUI
 		{
 			mWhiteSpace = true;
 			dimensions.size = Text::getGlyphSize(fp,'0');
+			dimensions.size.width = Text::getSpaceWidth(fp);
 		}
 		else if(Text::isTab(cp))
 		{
 			mWhiteSpace = true;
 			dimensions.size = Text::getGlyphSize(fp,'0');
+			dimensions.size.width = Text::getSpaceWidth(fp);
 			dimensions.size.width *= 4;
 		}
 		else
@@ -71,10 +73,12 @@ namespace QuickGUI
 		if(Text::isSpace(codePoint))
 		{
 			dimensions.size = Text::getGlyphSize(fp,'0');
+			dimensions.size.width = Text::getSpaceWidth(fp);
 		}
 		else if(Text::isTab(codePoint))
 		{
 			dimensions.size = Text::getGlyphSize(fp,'0');
+			dimensions.size.width = Text::getSpaceWidth(fp);
 			dimensions.size.width *= 4;
 		}
 		else

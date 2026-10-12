@@ -196,6 +196,10 @@ namespace QuickGUI
 		*/
 		static float getGlyphWidth(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
 		/**
+		* Returns the width of a space character in the given font.
+		*/
+		static float getSpaceWidth(Ogre::FontPtr fp);
+		/**
 		* Returns the pixel width of a particular string of text for a specified font.
 		*/
 		static float getTextWidth(const Ogre::String& fontName, Ogre::UTFString s);
