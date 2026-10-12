@@ -2,8 +2,6 @@
 #define QUICKGUIUTFSTRING_H
 
 #include <string>
-#include "OgreUTFString.h"
-#include "QuickGUIDeprecated.h"
 
 namespace QuickGUI
 {
@@ -37,18 +35,6 @@ namespace QuickGUI
 		UTFString(const std::string& utf8)
 		{
 			append(utf8.c_str());
-		}
-
-		QUICKGUI_DEPRECATED("Use QuickGUI::UTFString.")
-		UTFString(const Ogre::UTFString& s)
-		{
-			append(s.asUTF8().c_str());
-		}
-
-		QUICKGUI_DEPRECATED("Use QuickGUI::UTFString.")
-		operator Ogre::UTFString() const
-		{
-			return Ogre::UTFString(asUTF8());
 		}
 
 		UTFString(size_type count, code_point c) :
