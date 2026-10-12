@@ -2,6 +2,7 @@
 #define QUICKGUIBRUSH_H
 
 #include "QuickGUIBrushEnums.h"
+#include "QuickGUIBrushPipeline.h"
 #include "QuickGUIException.h"
 #include "QuickGUIExportDLL.h"
 #include "QuickGUIRect.h"
@@ -12,7 +13,6 @@
 #include "OgreHardwareBufferManager.h"
 #include "OgreHardwarePixelBuffer.h"
 #include "OgreHardwareVertexBuffer.h"
-#include "OgreHighLevelGpuProgram.h"
 #include "OgreRenderOperation.h"
 #include "OgreRenderSystem.h"
 #include "OgreRoot.h"
@@ -194,6 +194,9 @@ namespace QuickGUI
 		*/
 		void setTexture(Ogre::TexturePtr p);
 
+		/// Replaces how the brush sets state on the render system, and takes ownership of the pipeline.
+		void setPipeline(BrushPipeline* pipeline);
+
 		/**
 		* Updates the SceneManager, used to render any Materials.
 		*/
@@ -232,11 +235,7 @@ namespace QuickGUI
 		/// Cache Data
 		Ogre::TextureUnitState::UVWAddressingMode mTextureAddressMode; //we cache this to save cpu time
 
-        bool mUsingOpenGL;
-        bool mUsingProgrammablePipeline;
-
-        Ogre::HighLevelGpuProgramPtr mGuiVertexProgram;
-        Ogre::HighLevelGpuProgramPtr mGuiFragmentProgram;
+        BrushPipeline* mPipeline;
 
 		float mHorizontalTexelOffset;
 		float mVerticalTexelOffset;
@@ -272,10 +271,6 @@ namespace QuickGUI
 		* NOTE: verts and uv should be arrays of size 6.
 		*/
         void _buildQuadVertices(const Rect& dimensions, const UVRect& uvCoords, Vector3* verts, Vector2* uv);
-
-        void _initialiseGpuPipeline();
-        void _applyPassState();
-        void _applyFixedFunctionDefaults();
     };
 }
 
