@@ -273,7 +273,7 @@ namespace QuickGUI
 			resizeRenderTarget();
 
 			// setRenderTarget
-			brush->setRenderTarget(mTexture);
+			brush->setRenderTargetTexture(mTexture->getName());
 
 			// clearRenderTarget
 			brush->clear();
@@ -289,8 +289,8 @@ namespace QuickGUI
 				mDesc->textDesc = mTitleBar->mDesc->textDesc;
 		}
 
-		brush->setRenderTarget(NULL);
-		brush->setTexture(mTexture);
+		brush->setDefaultRenderTarget();
+		brush->setTexture(mTexture->getName());
 		brush->setColor(mWidgetDesc->widget_baseColor);
 		brush->setOpacity(getAbsoluteOpacity());
 		brush->drawRectangle(mWidgetDesc->widget_dimensions,UVRect(0,0,1,1));

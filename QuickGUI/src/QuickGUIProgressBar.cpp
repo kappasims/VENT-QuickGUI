@@ -223,7 +223,7 @@ namespace QuickGUI
 
 		brush->drawSkinElement(Rect(mTexturePosition,mWidgetDesc->widget_dimensions.size),mSkinElement);
 
-		brush->setTexture(mOutputBarTexture);
+		brush->setTexture(mOutputBarTexture->getName());
 		Rect barRect = mClientDimensions;
 		barRect.translate(mTexturePosition);
 		brush->drawRectangle(barRect,UVRect(0,0,1,1));
