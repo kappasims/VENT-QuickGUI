@@ -4,6 +4,7 @@
 #include "QuickGUIEventHandlerManager.h"
 #include "QuickGUIExportDLL.h"
 #include "QuickGUIFont.h"
+#include "QuickGUIFontRegistry.h"
 #include "QuickGUIManager.h"
 
 #include "OgrePrerequisites.h"
@@ -64,6 +65,19 @@ namespace QuickGUI
 		* Gets the font that is used by widgets on initialization, see "getDefaultFontName".
 		*/
 		const Font& getDefaultFont();
+		/// Returns the height in pixels of any glyph of the named font.
+		float getFontHeight(const Ogre::String& fontName);
+		/// Returns the name of the texture that holds the glyph bitmaps of the named font.
+		Ogre::String getFontTextureName(const Ogre::String& fontName);
+		float getGlyphHeight(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
+		UVRect getGlyphUVCoords(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
+		Size getGlyphSize(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
+		float getGlyphAdvance(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
+		float getGlyphBearing(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
+		float getTextWidth(const Ogre::String& fontName, const Ogre::UTFString& s);
+		void saveFontTextureToFile(const Ogre::String& fontName, const Ogre::String& fileName);
+		/// Returns the registry that owns the fonts.
+		FontRegistry& getFontRegistry();
 		/**
 		* Get the number of seconds the cursor has to idle over a widget
 		* before the ON_HOVER event is fired.
@@ -74,9 +88,7 @@ namespace QuickGUI
 		* Sets the default color used by widgets on initialization.
 		*/
 		void setDefaultColor(const ColourValue& cv);
-		/**
-		* Sets the default font used by widgets on initialization.
-		*/
+		QUICKGUI_DEPRECATED("The default font is chosen when the Root is created.")
 		void setDefaultFontName(const Ogre::String& fontName);
 		/**
 		* Set the number of seconds the cursor has to idle over a widget
@@ -96,8 +108,7 @@ namespace QuickGUI
 
 	protected:
 		ColourValue mDefaultColor;
-		Ogre::String mDefaultFontName;
-		std::map<Ogre::String,Font*> mFonts;
+		FontRegistry mFontRegistry;
 
 		int mGUIManagerCounter;
 

@@ -53,7 +53,7 @@ namespace QuickGUI
         float height;
         for(int index = 0; index < static_cast<int>(segments.size()); ++index)
         {
-            height = Root::getSingleton().getFont(segments[index].fontName).getHeight();
+            height = Root::getSingleton().getFontHeight(segments[index].fontName);
             if(height > maxHeight)
                 maxHeight = height;
         }
@@ -76,7 +76,7 @@ namespace QuickGUI
         float width = 0;
         for(int index = 0; index < static_cast<int>(segments.size()); ++index)
         {
-            width += Root::getSingleton().getFont(segments[index].fontName).getTextWidth(segments[index].text);
+            width += Root::getSingleton().getTextWidth(segments[index].fontName,segments[index].text);
         }
 
         return width;
@@ -271,7 +271,7 @@ namespace QuickGUI
 
     float Text::getFontHeight(const Ogre::String& fontName)
     {
-        return Root::getSingleton().getFont(fontName).getHeight();
+        return Root::getSingleton().getFontHeight(fontName);
     }
 
     float Text::getFontHeight(Ogre::FontPtr fp)
@@ -281,7 +281,7 @@ namespace QuickGUI
 
     Ogre::TexturePtr Text::getFontTexture(const Ogre::String& fontName)
     {
-        return static_cast<Ogre::TexturePtr>(Ogre::TextureManager::getSingleton().getByName(Root::getSingleton().getFont(fontName).getTextureName()));
+        return static_cast<Ogre::TexturePtr>(Ogre::TextureManager::getSingleton().getByName(Root::getSingleton().getFontTextureName(fontName)));
     }
 
     Ogre::TexturePtr Text::getFontTexture(Ogre::FontPtr fp)
@@ -291,7 +291,7 @@ namespace QuickGUI
 
     Ogre::String Text::getFontTextureName(const Ogre::String& fontName)
     {
-        return Root::getSingleton().getFont(fontName).getTextureName();
+        return Root::getSingleton().getFontTextureName(fontName);
     }
 
     Ogre::String Text::getFontTextureName(Ogre::FontPtr fp)
@@ -301,7 +301,7 @@ namespace QuickGUI
 
     float Text::getGlyphHeight(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
     {
-        return Root::getSingleton().getFont(fontName).getGlyphHeight(cp);
+        return Root::getSingleton().getGlyphHeight(fontName,cp);
     }
 
     float Text::getGlyphHeight(Ogre::FontPtr fp, Ogre::UTFString::code_point cp)
@@ -311,7 +311,7 @@ namespace QuickGUI
 
     UVRect Text::getGlyphUVCoords(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
     {
-        return Root::getSingleton().getFont(fontName).getGlyphUVCoords(cp);
+        return Root::getSingleton().getGlyphUVCoords(fontName,cp);
     }
 
     UVRect Text::getGlyphUVCoords(Ogre::FontPtr fp, Ogre::UTFString::code_point cp)
@@ -321,8 +321,7 @@ namespace QuickGUI
 
     Size Text::getGlyphSize(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
     {
-        const Font& font = Root::getSingleton().getFont(fontName);
-        return Size(font.getGlyphAdvance(cp),font.getGlyphHeight(cp));
+        return Root::getSingleton().getGlyphSize(fontName,cp);
     }
 
     Size Text::getGlyphSize(Ogre::FontPtr fp, Ogre::UTFString::code_point cp)
@@ -333,7 +332,7 @@ namespace QuickGUI
 
     float Text::getGlyphWidth(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
     {
-        return Root::getSingleton().getFont(fontName).getGlyphAdvance(cp);
+        return Root::getSingleton().getGlyphAdvance(fontName,cp);
     }
 
     float Text::getGlyphWidth(Ogre::FontPtr fp, Ogre::UTFString::code_point cp)
@@ -343,7 +342,7 @@ namespace QuickGUI
 
     float Text::getGlyphAdvance(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
     {
-        return Root::getSingleton().getFont(fontName).getGlyphAdvance(cp);
+        return Root::getSingleton().getGlyphAdvance(fontName,cp);
     }
 
     float Text::getGlyphAdvance(Ogre::FontPtr fp, Ogre::UTFString::code_point cp)
@@ -353,7 +352,7 @@ namespace QuickGUI
 
     float Text::getGlyphBearing(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
     {
-        return Root::getSingleton().getFont(fontName).getGlyphBearing(cp);
+        return Root::getSingleton().getGlyphBearing(fontName,cp);
     }
 
     float Text::getGlyphBearing(Ogre::FontPtr fp, Ogre::UTFString::code_point cp)
@@ -363,7 +362,7 @@ namespace QuickGUI
 
     float Text::getTextWidth(const Ogre::String& fontName, Ogre::UTFString s)
     {
-        return Root::getSingleton().getFont(fontName).getTextWidth(s);
+        return Root::getSingleton().getTextWidth(fontName,s);
     }
 
     float Text::getTextWidth(Ogre::FontPtr fp, Ogre::UTFString s)
@@ -373,7 +372,7 @@ namespace QuickGUI
 
     void Text::saveFontTextureToFile(const Ogre::String& fontName, const Ogre::String& fileName)
     {
-        Root::getSingleton().getFont(fontName).saveTextureToFile(fileName);
+        Root::getSingleton().saveFontTextureToFile(fontName,fileName);
     }
 
     void Text::saveFontTextureToFile(Ogre::FontPtr fp, const Ogre::String& fileName)

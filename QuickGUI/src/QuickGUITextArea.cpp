@@ -144,7 +144,7 @@ namespace QuickGUI
 
 		mDesc = dynamic_cast<TextAreaDesc*>(mWidgetDesc);
 
-		mTextCursor->setHeight(Root::getSingleton().getFont(td->textarea_defaultFontName).getHeight());
+		mTextCursor->setHeight(Root::getSingleton().getFontHeight(td->textarea_defaultFontName));
 		mTextCursor->setSkinType(td->textarea_textCursorDefaultSkinTypeName);
 
 		mDesc->widget_consumeKeyboardEvents = true;
@@ -695,7 +695,7 @@ namespace QuickGUI
 
 		// Update Cursor Height to match the font of the character to the left of cursor
 		if(index == 0)
-			mTextCursor->setHeight(Root::getSingleton().getFont(mDesc->textarea_defaultFontName).getHeight());
+			mTextCursor->setHeight(Root::getSingleton().getFontHeight(mDesc->textarea_defaultFontName));
 		else
 			mTextCursor->setHeight(mText->getCharacter(static_cast<unsigned int>(index - 1))->font->getHeight());
 

@@ -16,6 +16,7 @@ set (QuickGUI_FILES_SRC
 	QuickGUIException.cpp
 	QuickGUIFactoryManager.cpp
 	QuickGUIFont.cpp
+	QuickGUIFontRegistry.cpp
 	QuickGUIForwardDeclaredDesc.cpp
 	QuickGUIHScrollBar.cpp
 	QuickGUIImage.cpp

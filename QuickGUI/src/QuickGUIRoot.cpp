@@ -57,17 +57,21 @@ template<> QuickGUI::Root* Ogre::Singleton<QuickGUI::Root>::msSingleton = 0;
 
 namespace QuickGUI
 {
+	// The default font is the first one Ogre has loaded.
+	static Ogre::String findFirstFontName()
+	{
+		Ogre::ResourceManager::ResourceMapIterator it = Ogre::FontManager::getSingleton().getResourceIterator();
+		if(!it.hasMoreElements())
+			throw Exception(Exception::ERR_INVALID_STATE,"No fonts have been found! At least one font must exist for QuickGUI use!","Root::Root");
+
+		return it.getNext()->getName();
+	}
+
 	Root::Root() :
+		mFontRegistry(findFirstFontName()),
 		mGUIManagerCounter(-1),
 		mDefaultHoverTime(3)
 	{
-		// Get the default font
-        Ogre::ResourceManager::ResourceMapIterator it = Ogre::FontManager::getSingleton().getResourceIterator();
-        if(it.hasMoreElements())
-            mDefaultFontName = it.getNext()->getName();
-        else
-            throw Exception(Exception::ERR_INVALID_STATE,"No fonts have been found! At least one font must exist for QuickGUI use!","Root::Root");
-
 		mDefaultColor = ColourValue::White;
 
 		dpiScale = 1;
@@ -244,12 +248,6 @@ namespace QuickGUI
 		OGRE_DELETE EventHandlerManager::getSingletonPtr();
 		OGRE_DELETE Brush::getSingletonPtr();
 		OGRE_DELETE SkinDefinitionManager::getSingletonPtr();
-
-		for(std::map<Ogre::String,Font*>::iterator it = mFonts.begin(); it != mFonts.end(); ++it)
-		{
-			OGRE_DELETE_T((*it).second,Font,Ogre::MEMCATEGORY_GENERAL);
-		}
-		mFonts.clear();
 	}
 
 	Root* Root::getSingletonPtr(void) 
@@ -330,32 +328,68 @@ namespace QuickGUI
 
 	Ogre::String Root::getDefaultFontName()
 	{
-		return mDefaultFontName;
+		return mFontRegistry.getDefaultFontName();
 	}
 
 	const Font& Root::getFont(const Ogre::String& fontName)
 	{
-		std::map<Ogre::String,Font*>::iterator it = mFonts.find(fontName);
-		if(it != mFonts.end())
-		{
-			return *(it->second);
-		}
-
-		Ogre::FontPtr fp = static_cast<Ogre::FontPtr>(Ogre::FontManager::getSingleton().getByName(fontName));
-		if(fp.isNull())
-		{
-			throw Exception(Exception::ERR_ITEM_NOT_FOUND,"No font with name \"" + fontName + "\" exists!","Root::getFont");
-		}
-
-		Font* font = OGRE_NEW_T(OgreFont,Ogre::MEMCATEGORY_GENERAL)(fp);
-		mFonts[fontName] = font;
-
-		return *font;
+		return mFontRegistry.getFont(fontName);
 	}
 
 	const Font& Root::getDefaultFont()
 	{
-		return getFont(mDefaultFontName);
+		return mFontRegistry.getDefaultFont();
+	}
+
+	FontRegistry& Root::getFontRegistry()
+	{
+		return mFontRegistry;
+	}
+
+	float Root::getFontHeight(const Ogre::String& fontName)
+	{
+		return mFontRegistry.getFont(fontName).getHeight();
+	}
+
+	Ogre::String Root::getFontTextureName(const Ogre::String& fontName)
+	{
+		return mFontRegistry.getFont(fontName).getTextureName();
+	}
+
+	float Root::getGlyphHeight(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
+	{
+		return mFontRegistry.getFont(fontName).getGlyphHeight(cp);
+	}
+
+	UVRect Root::getGlyphUVCoords(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
+	{
+		return mFontRegistry.getFont(fontName).getGlyphUVCoords(cp);
+	}
+
+	Size Root::getGlyphSize(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
+	{
+		const Font& font = mFontRegistry.getFont(fontName);
+		return Size(font.getGlyphAdvance(cp),font.getGlyphHeight(cp));
+	}
+
+	float Root::getGlyphAdvance(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
+	{
+		return mFontRegistry.getFont(fontName).getGlyphAdvance(cp);
+	}
+
+	float Root::getGlyphBearing(const Ogre::String& fontName, Ogre::UTFString::code_point cp)
+	{
+		return mFontRegistry.getFont(fontName).getGlyphBearing(cp);
+	}
+
+	float Root::getTextWidth(const Ogre::String& fontName, const Ogre::UTFString& s)
+	{
+		return mFontRegistry.getFont(fontName).getTextWidth(s);
+	}
+
+	void Root::saveFontTextureToFile(const Ogre::String& fontName, const Ogre::String& fileName)
+	{
+		mFontRegistry.getFont(fontName).saveTextureToFile(fileName);
 	}
 
 	float Root::getDefaultHoverTime()
@@ -402,8 +436,7 @@ namespace QuickGUI
 
 	void Root::setDefaultFontName(const Ogre::String& fontName)
 	{
-		getFont(fontName);
-		mDefaultFontName = fontName;
+		mFontRegistry.setDefaultFontName(fontName);
 	}
 
 	void Root::setDefaultHoverTime(float seconds)

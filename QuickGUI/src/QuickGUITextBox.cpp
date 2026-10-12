@@ -150,7 +150,7 @@ namespace QuickGUI
 		mDesc->textbox_maxCharacters = td->textbox_maxCharacters;
 
 		// Set a really high width, we want everything on 1 line.
-		mDesc->textDesc.allottedWidth = mDesc->textbox_maxCharacters * Root::getSingleton().getFont(mDesc->textbox_defaultFontName).getGlyphAdvance('0')*Root::getSingletonPtr()->getGUIScale();
+		mDesc->textDesc.allottedWidth = mDesc->textbox_maxCharacters * Root::getSingleton().getGlyphAdvance(mDesc->textbox_defaultFontName,'0')*Root::getSingletonPtr()->getGUIScale();
 			
 		mText = OGRE_NEW_T(Text,Ogre::MEMCATEGORY_GENERAL)(mDesc->textDesc);
 
