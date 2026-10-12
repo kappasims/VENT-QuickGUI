@@ -784,14 +784,4 @@ namespace QuickGUI
 			mTextCursor->setPosition(p);
 		}
 	}
-
-	void TextBox::addText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		addText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
-
-	void TextBox::setText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		setText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
 }

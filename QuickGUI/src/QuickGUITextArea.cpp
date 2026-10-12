@@ -1008,19 +1008,4 @@ namespace QuickGUI
 
 		_determineScrollBarVisibility();
 	}
-
-	void TextArea::addText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		addText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
-
-	void TextArea::addTextLine(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		addTextLine(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
-
-	void TextArea::setText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		setText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
 }

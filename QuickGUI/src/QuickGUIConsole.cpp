@@ -353,19 +353,4 @@ namespace QuickGUI
 
 		_updateComponentDimensions();
 	}
-
-	void Console::addDisplayAreaText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		addDisplayAreaText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
-
-	void Console::addInputBoxText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		addInputBoxText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
-
-	void Console::setInputBoxText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		setInputBoxText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
 }

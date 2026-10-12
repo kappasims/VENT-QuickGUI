@@ -775,9 +775,4 @@ namespace QuickGUI
 
 		redraw();
 	}
-
-	void Window::setTitleBarText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		setTitleBarText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
 }

@@ -10,7 +10,6 @@
 #include "QuickGUIFont.h"
 
 #include "OgreColourValue.h"
-#include <OgreFontManager.h>
 #include "OgrePrerequisites.h"
 #include "OgreTextureManager.h"
 #include "OgreUTFString.h"
@@ -130,54 +129,6 @@ namespace QuickGUI
 		* Converts "\\n" and "\\r" into '\n', and "\\t" into '\t'.
 		*/
 		static void convertTextToWhiteSpace(Ogre::UTFString& s);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Ogre::FontPtr getFirstAvailableFont();
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Ogre::FontPtr getFont(const Ogre::String& fontName);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getFontHeight(const Ogre::String& fontName);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getFontHeight(Ogre::FontPtr fp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Ogre::TexturePtr getFontTexture(const Ogre::String& fontName);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Ogre::TexturePtr getFontTexture(Ogre::FontPtr fp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Ogre::String getFontTextureName(const Ogre::String& fontName);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Ogre::String getFontTextureName(Ogre::FontPtr fp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphHeight(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphHeight(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static UVRect getGlyphUVCoords(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static UVRect getGlyphUVCoords(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Size getGlyphSize(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static Size getGlyphSize(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphWidth(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphWidth(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphAdvance(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphAdvance(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphBearing(const Ogre::String& fontName, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getGlyphBearing(Ogre::FontPtr fp, Ogre::UTFString::code_point cp);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getTextWidth(const Ogre::String& fontName, Ogre::UTFString s);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static float getTextWidth(Ogre::FontPtr fp, Ogre::UTFString s);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static void saveFontTextureToFile(const Ogre::String& fontName, const Ogre::String& fileName);
-		QUICKGUI_DEPRECATED("Use Root::getFont and the Font class.")
-		static void saveFontTextureToFile(Ogre::FontPtr fp, const Ogre::String& fileName);
 	public:
 		Text(TextDesc& d);
 		~Text();
@@ -196,8 +147,6 @@ namespace QuickGUI
 		* Adds text to this object.
 		*/
 		void addText(Ogre::UTFString s, const Font& font, const ColourValue& cv);
-		QUICKGUI_DEPRECATED("Use the overload that takes a Font from Root::getFont.")
-		void addText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv);
 		/**
 		* Adds Text using Text Segments.
 		*/
@@ -206,8 +155,6 @@ namespace QuickGUI
 		* Adds new line of text to this object.
 		*/
 		void addTextLine(Ogre::UTFString s, const Font& font, const ColourValue& cv);
-		QUICKGUI_DEPRECATED("Use the overload that takes a Font from Root::getFont.")
-		void addTextLine(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv);
 		/**
 		* Adds new line of Text using Text Segments.
 		*/
@@ -428,8 +375,6 @@ namespace QuickGUI
 		* Sets the text for this object.
 		*/
 		void setText(Ogre::UTFString s, const Font& font, const ColourValue& cv);
-		QUICKGUI_DEPRECATED("Use the overload that takes a Font from Root::getFont.")
-		void setText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv);
 		/**
 		* Sets the Text using Text Segments.
 		*/

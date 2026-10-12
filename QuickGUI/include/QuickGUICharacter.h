@@ -6,8 +6,6 @@
 #include "QuickGUIUVRect.h"
 #include "QuickGUIOgreEquivalents.h"
 #include "QuickGUIFont.h"
-#include "OgreFont.h"
-#include "OgreTexture.h"
 
 #include "OgreColourValue.h"
 #include "OgreUTFString.h"
@@ -17,9 +15,7 @@ namespace QuickGUI
 	class _QuickGUIExport Character
 	{
 	public:
-		Character(Ogre::UTFString::code_point cp, const Font& f, ColourValue cv);
-		QUICKGUI_DEPRECATED("Use the constructor that takes a Font from Root::getFont.")
-		Character(Ogre::UTFString::code_point cp, Ogre::FontPtr fp, ColourValue cv);		
+		Character(Ogre::UTFString::code_point cp, const Font& f, ColourValue cv);		
 
 		/**
 		* Returns true if this character is highlighted, false otherwise.
@@ -74,12 +70,6 @@ namespace QuickGUI
 		Rect dimensions;
 		/// Font of the glyph being drawn.
 		const Font* font;
-		/// The Ogre font of the glyph being drawn.
-		QUICKGUI_DEPRECATED("Use font.")
-		Ogre::FontPtr fontPtr;
-		/// The texture of the Ogre font.
-		QUICKGUI_DEPRECATED("Use font->getTextureName().")
-		Ogre::TexturePtr texturePtr;
 		/// UV coords of the glyph bitmap within the font texture.
 		UVRect uvCoords;
 

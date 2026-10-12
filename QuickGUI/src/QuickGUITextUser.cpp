@@ -302,14 +302,4 @@ namespace QuickGUI
 
 		Redraw();
 	}
-
-	void TextUser::addText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		addText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
-
-	void TextUser::setText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		setText(s,Root::getSingleton().getFont(fp->getName()),cv);
-	}
 }

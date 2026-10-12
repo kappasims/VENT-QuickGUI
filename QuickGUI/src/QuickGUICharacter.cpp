@@ -1,6 +1,5 @@
 #include "QuickGUICharacter.h"
 #include "QuickGUIText.h"
-#include "QuickGUIRoot.h"
 
 namespace QuickGUI
 {
@@ -13,17 +12,6 @@ namespace QuickGUI
 		mBearing(0)
 	{
 		setFont(f);
-	}
-
-	Character::Character(Ogre::UTFString::code_point cp, Ogre::FontPtr fp, ColourValue cv) :
-		codePoint(cp),
-		colorValue(cv.r,cv.g,cv.b,cv.a),
-		font(&Root::getSingleton().getFont(fp->getName())),
-		mHighlighted(false),
-		mAdvance(0),
-		mBearing(0)
-	{
-		setFont(*font);
 	}
 
 	bool Character::getHighlighted()
@@ -56,8 +44,6 @@ namespace QuickGUI
 		float baseline = getBaseline();
 
 		font = &f;
-		fontPtr = static_cast<Ogre::FontPtr>(Ogre::FontManager::getSingleton().getByName(f.getName()));
-		texturePtr = static_cast<Ogre::TexturePtr>(Ogre::TextureManager::getSingleton().getByName(f.getTextureName()));
 		mBearing = 0;
 		mAdvance = font->getGlyphAdvance(codePoint);
 

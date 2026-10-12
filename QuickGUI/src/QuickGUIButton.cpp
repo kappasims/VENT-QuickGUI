@@ -1,4 +1,3 @@
-#include "QuickGUIRoot.h"
 #include "QuickGUIButton.h"
 #include "QuickGUISkinDefinitionManager.h"
 #include "QuickGUISkinDefinition.h"
@@ -278,10 +277,5 @@ namespace QuickGUI
 	Ogre::String Button::getHiddenString()
 	{
 		return hiddenString;
-	}
-
-	void Button::setText(Ogre::UTFString s, Ogre::FontPtr fp, const ColourValue& cv)
-	{
-		setText(s,Root::getSingleton().getFont(fp->getName()),cv);
 	}
 }
