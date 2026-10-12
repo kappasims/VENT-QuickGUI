@@ -639,16 +639,6 @@ namespace QuickGUI
 		return mColourValue.a;
 	}
 
-	Ogre::Viewport* Brush::getRenderTarget()
-	{
-		return mRenderTarget;
-	}
-
-	Ogre::TexturePtr Brush::getTexture()
-	{
-		return mTexture;
-	}
-
 	std::string Brush::getTextureName()
 	{
 		return mTexture->getName();
@@ -809,16 +799,6 @@ namespace QuickGUI
 		_setViewport(p->getBuffer()->getRenderTarget()->getViewport(0));
 	}
 
-    void Brush::setRenderTarget(Ogre::TexturePtr p)
-    {
-            setRenderTargetTexture(p->getName());
-    }
-
-	void Brush::setRenderTarget(Ogre::Viewport* vp)
-	{
-		_setViewport(vp);
-	}
-
 	void Brush::_setViewport(Ogre::Viewport* vp)
 	{
 		if(vp == NULL)
@@ -854,20 +834,6 @@ namespace QuickGUI
 
 			mTexture = tm->getByName(textureName);
 		}
-        mPipeline->setTexture(mTexture);
-    }
-
-    void Brush::setTexture(Ogre::TexturePtr p)
-    {
-        if(mQueuedItems)
-                throw Exception(Exception::ERR_RENDERINGAPI_ERROR,"Cannot Change Texture with Items Queued for Drawing! Call endRectQueue to draw all queued items before hand.","Brush::setTexture");
-
-
-		if(p.isNull())
-			mTexture = mDefaultTexture;
-		else
-			mTexture = p;
-
         mPipeline->setTexture(mTexture);
     }
 

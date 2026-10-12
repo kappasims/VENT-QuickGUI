@@ -123,16 +123,6 @@ namespace QuickGUI
 		* Gets the opacity used to draw future elements on the render target.
 		*/
 		float getOpacity();
-		/**
-		* Gets the target currently being drawn to.
-		*/
-		QUICKGUI_DEPRECATED("Use pushRenderTarget and popRenderTarget to return to a render target.")
-		Ogre::Viewport* getRenderTarget();
-		/**
-		* Retrieves the current texture used for drawing operations.
-		*/
-		QUICKGUI_DEPRECATED("Use getTextureName.")
-		Ogre::TexturePtr getTexture();
 		/// Retrieves the name of the current texture used for drawing operations.
 		std::string getTextureName();
 
@@ -189,28 +179,12 @@ namespace QuickGUI
 		void setOpacity(float opacity);
 		/// Draws to the default viewport.
 		void setDefaultRenderTarget();
-		/**
-		* This function specifies where to draw to.
-		*/
-		QUICKGUI_DEPRECATED("Use setRenderTargetTexture with the name of the texture.")
-		void setRenderTarget(Ogre::TexturePtr p);
-		/**
-		* This function specifies where to draw to.  If NULL is passed in, the
-		* default viewport is written to.
-		*/
-		QUICKGUI_DEPRECATED("Use setDefaultRenderTarget. The GUIManager sets the default viewport with updateViewport.")
-		void setRenderTarget(Ogre::Viewport* vp);
 		/// Draws to the texture with the given name, which has to be a render target texture.
 		void setRenderTargetTexture(const std::string& textureName);
 		/**
 		* Sets the current texture to draw with
 		*/
 		void setTexture(const Ogre::String& textureName);
-		/**
-		* Sets the current texture to draw with
-		*/
-		QUICKGUI_DEPRECATED("Use setTexture with the name of the texture.")
-		void setTexture(Ogre::TexturePtr p);
 
 		/// Replaces how the brush sets state on the render system, and takes ownership of the pipeline.
 		void setPipeline(BrushPipeline* pipeline);

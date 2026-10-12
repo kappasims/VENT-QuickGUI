@@ -99,7 +99,7 @@ namespace QuickGUI
 
 			// Set texture to largest font's texture
 			Ogre::TexturePtr texturePtr = Text::getFontTexture(mLargestFont);
-			brush->setTexture(texturePtr);
+			brush->setTexture(texturePtr->getName());
 			brush->setColor(mCharacters.front()->colorValue);
 
 			brush->beginRectQueue();
