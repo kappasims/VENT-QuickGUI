@@ -382,6 +382,18 @@ namespace QuickGUI
 		return width;
 	}
 
+	float Text::getSpaceWidth(Ogre::FontPtr fp)
+	{
+		float zeroWidth = getGlyphSize(fp,'0').width;
+
+		// The font atlas holds no glyph for the space character. Monospace fonts give it the width of a digit,
+		// proportional fonts give it half of that.
+		if(getGlyphSize(fp,'i').width == getGlyphSize(fp,'W').width)
+			return zeroWidth;
+
+		return Ogre::Math::Ceil(zeroWidth * 0.5f);
+	}
+
 	float Text::getTextWidth(const Ogre::String& fontName, Ogre::UTFString s)
 	{
 		return getTextWidth(getFont(fontName),s);
@@ -397,11 +409,11 @@ namespace QuickGUI
 		{
 			if(isSpace((*it)))
 			{
-				charWidth = getGlyphSize(fp,'0').width;
+				charWidth = getSpaceWidth(fp);
 			}
 			else if(isTab((*it)))
 			{
-				charWidth = (getGlyphSize(fp,'0').width * 4);
+				charWidth = (getSpaceWidth(fp) * 4);
 			}
 			else
 			{
