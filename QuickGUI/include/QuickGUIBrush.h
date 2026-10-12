@@ -2,6 +2,7 @@
 #define QUICKGUIBRUSH_H
 
 #include "QuickGUIBrushEnums.h"
+#include "QuickGUIDeprecated.h"
 #include "QuickGUIException.h"
 #include "QuickGUIExportDLL.h"
 #include "QuickGUIRect.h"
@@ -24,6 +25,7 @@
 
 
 
+#include <string>
 #include <vector>
 
 namespace QuickGUI
@@ -124,11 +126,15 @@ namespace QuickGUI
 		/**
 		* Gets the target currently being drawn to.
 		*/
+		QUICKGUI_DEPRECATED("Use pushRenderTarget and popRenderTarget to return to a render target.")
 		Ogre::Viewport* getRenderTarget();
 		/**
 		* Retrieves the current texture used for drawing operations.
 		*/
+		QUICKGUI_DEPRECATED("Use getTextureName.")
 		Ogre::TexturePtr getTexture();
+		/// Retrieves the name of the current texture used for drawing operations.
+		std::string getTextureName();
 
 		/**
 		* Configures the Rendering system preparing it to draw in 2D.  Must be called
@@ -149,6 +155,11 @@ namespace QuickGUI
 		* will have the same texture.
 		*/
 		void queueRect(Rect r, UVRect ur);
+
+		/// Remembers the current render target, so popRenderTarget can return to it.
+		void pushRenderTarget();
+		/// Returns to the render target that the matching pushRenderTarget remembered.
+		void popRenderTarget();
 
 		/**
 		* Restores rendering system configuration.  Called after all drawing operations
@@ -176,15 +187,21 @@ namespace QuickGUI
 		* Sets the opacity of future elements drawn on the render target.
 		*/
 		void setOpacity(float opacity);
+		/// Draws to the default viewport.
+		void setDefaultRenderTarget();
 		/**
 		* This function specifies where to draw to.
 		*/
+		QUICKGUI_DEPRECATED("Use setRenderTargetTexture with the name of the texture.")
 		void setRenderTarget(Ogre::TexturePtr p);
 		/**
 		* This function specifies where to draw to.  If NULL is passed in, the
 		* default viewport is written to.
 		*/
+		QUICKGUI_DEPRECATED("Use setDefaultRenderTarget. The GUIManager sets the default viewport with updateViewport.")
 		void setRenderTarget(Ogre::Viewport* vp);
+		/// Draws to the texture with the given name, which has to be a render target texture.
+		void setRenderTargetTexture(const std::string& textureName);
 		/**
 		* Sets the current texture to draw with
 		*/
@@ -192,6 +209,7 @@ namespace QuickGUI
 		/**
 		* Sets the current texture to draw with
 		*/
+		QUICKGUI_DEPRECATED("Use setTexture with the name of the texture.")
 		void setTexture(Ogre::TexturePtr p);
 
 		/**
@@ -214,6 +232,7 @@ namespace QuickGUI
 		Ogre::MaterialPtr mGUIMaterial;
 
 		Ogre::Viewport* mRenderTarget;
+		std::vector<Ogre::Viewport*> mRenderTargetStack;
 		float mTargetWidth;
 		float mTargetHeight;
 		
@@ -259,6 +278,8 @@ namespace QuickGUI
 		*/
 		void _declareVertexStructure();
 		void _destroyVertexBuffer();
+		/// Sets the viewport that is drawn to. NULL is the default viewport.
+		void _setViewport(Ogre::Viewport* vp);
 
 		// Vertex functions
 
