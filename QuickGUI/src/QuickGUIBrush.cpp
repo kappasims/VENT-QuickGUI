@@ -649,6 +649,27 @@ namespace QuickGUI
 		return mTexture;
 	}
 
+	std::string Brush::getTextureName()
+	{
+		return mTexture->getName();
+	}
+
+	void Brush::pushRenderTarget()
+	{
+		mRenderTargetStack.push_back(mRenderTarget);
+	}
+
+	void Brush::popRenderTarget()
+	{
+		if(mRenderTargetStack.empty())
+			throw Exception(Exception::ERR_RENDERINGAPI_ERROR,"popRenderTarget has no matching pushRenderTarget!","Brush::popRenderTarget");
+
+		Ogre::Viewport* target = mRenderTargetStack.back();
+		mRenderTargetStack.pop_back();
+
+		_setViewport(target);
+	}
+
     void Brush::prepareToDraw()
     {
            mPipeline->beginFrame();
@@ -771,15 +792,34 @@ namespace QuickGUI
 		mColourValue.a = opacity;
 	}
 
+	void Brush::setDefaultRenderTarget()
+	{
+		_setViewport(NULL);
+	}
+
+	void Brush::setRenderTargetTexture(const std::string& textureName)
+	{
+		Ogre::TexturePtr p = Ogre::TextureManager::getSingleton().getByName(textureName);
+		if(p.isNull())
+			throw Exception(Exception::ERR_INVALID_RENDER_TARGET,"No texture named \"" + textureName + "\" exists.","Brush::setRenderTargetTexture");
+
+		if((p->getUsage() & Ogre::TU_RENDERTARGET) == 0)
+			throw Exception(Exception::ERR_INVALID_RENDER_TARGET,"Texture is not a valid Render Target. Make sure the Texture is created with TU_RENDERTARGET.", "Brush::setRenderTargetTexture");
+
+		_setViewport(p->getBuffer()->getRenderTarget()->getViewport(0));
+	}
+
     void Brush::setRenderTarget(Ogre::TexturePtr p)
     {
-            if((p->getUsage() & Ogre::TU_RENDERTARGET) == 0)
-                    throw Exception(Exception::ERR_INVALID_RENDER_TARGET,"Texture is not a valid Render Target. Make sure the Texture is created with TU_RENDERTARGET.", "Brush::setRenderTarget");
-
-            setRenderTarget(p->getBuffer()->getRenderTarget()->getViewport(0));
+            setRenderTargetTexture(p->getName());
     }
 
 	void Brush::setRenderTarget(Ogre::Viewport* vp)
+	{
+		_setViewport(vp);
+	}
+
+	void Brush::_setViewport(Ogre::Viewport* vp)
 	{
 		if(vp == NULL)
 			mRenderTarget = mDefaultViewport;
