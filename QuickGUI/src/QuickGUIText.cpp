@@ -421,7 +421,7 @@ namespace QuickGUI
                 if(Text::isNullCharacter((*cItr)->codePoint))
                     break;
 
-                if(isWhiteSpace((*cItr)->codePoint) || Ogre::StringUtil::startsWith((*cItr)->font->getName(),"Ja",false) || Ogre::StringUtil::startsWith((*cItr)->font->getName(),"Chinese",false))
+                if(isWhiteSpace((*cItr)->codePoint) || Ogre::StringUtil::startsWith((*cItr)->getFontName(),"Ja",false) || Ogre::StringUtil::startsWith((*cItr)->getFontName(),"Chinese",false))
                 {
                     // If its a newline we can add it to the TextLine, since they have a width of 0.
                     // We also want to create a New TextLine object.
@@ -1111,7 +1111,7 @@ namespace QuickGUI
         Ogre::UTFString text;
 
         // initialize segment properties
-        currentFont = mCharacters.front()->font->getName();
+        currentFont = mCharacters.front()->getFontName();
         currentColor = mCharacters.front()->colorValue;
         text = "";
 
@@ -1119,7 +1119,7 @@ namespace QuickGUI
         for(std::list<Character*>::iterator it = mCharacters.begin(); it != --(mCharacters.end()); ++it)
         {
             // If this character has a different color or font, write out the previous text segment.
-            if(((*it)->font->getName() != currentFont) || ((*it)->colorValue != currentColor))
+            if(((*it)->getFontName() != currentFont) || ((*it)->colorValue != currentColor))
             {
                 Text::convertWhitespaceToText(text);
 
@@ -1129,7 +1129,7 @@ namespace QuickGUI
                 s.text = text;
                 segments.push_back(s);
 
-                currentFont = (*it)->font->getName();
+                currentFont = (*it)->getFontName();
                 currentColor = (*it)->colorValue;
                 text.clear();
             }

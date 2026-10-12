@@ -65,6 +65,14 @@ namespace QuickGUI
 		* Returns the horizontal bearing for this glyph.
 		*/
 		float getBearing() const { return mBearing; }
+		/// Returns the name of the font this character is drawn with.
+		Ogre::String getFontName() const { return font->getName(); }
+		/// Returns the height in pixels of the font this character is drawn with.
+		float getFontHeight() const { return font->getHeight(); }
+		/// Returns the distance in pixels from the top of the tallest glyph of the font to the baseline.
+		float getMaxBearingY() const { return font->getMaxBearingY(); }
+		/// Returns the name of the texture that holds the bitmap of this glyph.
+		Ogre::String getTextureName() const { return font->getTextureName(); }
 
 		/// Code point of the glyph
 		Ogre::UTFString::code_point codePoint;

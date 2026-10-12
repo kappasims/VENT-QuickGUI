@@ -697,7 +697,7 @@ namespace QuickGUI
 		if(index == 0)
 			mTextCursor->setHeight(Root::getSingleton().getFont(mDesc->textarea_defaultFontName).getHeight());
 		else
-			mTextCursor->setHeight(mText->getCharacter(static_cast<unsigned int>(index - 1))->font->getHeight());
+			mTextCursor->setHeight(mText->getCharacter(static_cast<unsigned int>(index - 1))->getFontHeight());
 
 		// Update CursorIndex
 		mCursorIndex = index;

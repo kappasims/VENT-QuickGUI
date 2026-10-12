@@ -19,7 +19,7 @@ namespace QuickGUI
 
 		for(std::vector<Character*>::iterator it = mCharacters.begin(); it != mCharacters.end(); ++it)
 		{
-			float baseLine = (*it)->font->getMaxBearingY();
+			float baseLine = (*it)->getMaxBearingY();
 
 			(*it)->dimensions.position.y = maxBaseLine - baseLine;
 			(*it)->dimensions.position.roundUp();
@@ -38,7 +38,7 @@ namespace QuickGUI
 		c->setBaseline(baseline);
 		mCharacters.push_back(c);
 
-		if((mLargestFont == NULL) || (c->font->getHeight() > mLargestFont->getHeight()))
+		if((mLargestFont == NULL) || (c->getFontHeight() > mLargestFont->getHeight()))
 		{
 			mLargestFont = c->font;
 			_verticallyAlignCharacters();
@@ -46,7 +46,7 @@ namespace QuickGUI
 		else
 		{
 			float maxBaseLine = mLargestFont->getMaxBearingY();
-			float baseLine = c->font->getMaxBearingY();
+			float baseLine = c->getMaxBearingY();
 			c->dimensions.position.y = maxBaseLine - baseLine;
 		}
 
@@ -117,11 +117,11 @@ namespace QuickGUI
 				if((*it)->isWhiteSpace())
 					continue;
 
-				if( currentTexture != (*it)->font->getTextureName() )
+				if( currentTexture != (*it)->getTextureName() )
 				{
 					brush->endRectQueue();
 
-					currentTexture = (*it)->font->getTextureName();
+					currentTexture = (*it)->getTextureName();
 					brush->setTexture(currentTexture);
 
 					brush->beginRectQueue();
